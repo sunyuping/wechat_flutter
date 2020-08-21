@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 var _id = 0;
 
@@ -116,7 +116,7 @@ class Req {
           response = await _client.get(url, cancelToken: token);
         }
       } else {
-        if (mapNoEmpty(params) || formData.isNotEmpty) {
+        if (mapNoEmpty(params) || formData != null) {
           response = await _client.post(
             url,
             data: formData ?? params,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/provider/login_model.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/provider/login_model.dart';
 
 /// ProviderConfig  provider配置
 class ProviderConfig {
@@ -17,7 +17,7 @@ class ProviderConfig {
   ///全局
   ChangeNotifierProvider<GlobalModel> getGlobal(Widget child) {
     return ChangeNotifierProvider<GlobalModel>(
-      builder: (context) => GlobalModel(),
+      create: (context) => GlobalModel(),
       child: child,
     );
   }
@@ -25,7 +25,7 @@ class ProviderConfig {
   ///登陆页面
   ChangeNotifierProvider<LoginModel> getLoginPage(Widget child) {
     return ChangeNotifierProvider<LoginModel>(
-      builder: (context) => LoginModel(),
+      create: (context) => LoginModel(),
       child: child,
     );
   }

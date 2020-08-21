@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:dim/commom/util.dart';
-import 'package:dim_example/http/api.dart';
-import 'package:dim_example/pages/mine/code_page.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/http/api.dart';
+import 'package:wechat_flutter/pages/mine/code_page.dart';
+import 'package:wechat_flutter/tools/commom.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/im/info_handle.dart';
-import 'package:dim_example/pages/mine/change_name_page.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/pages/mine/change_name_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 
-import 'package:dim_example/ui/orther/label_row.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 
 class PersonalInfoPage extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   }
 
   _openGallery({type = ImageSource.gallery}) async {
-    final model = Provider.of<GlobalModel>(context);
+    final model = Provider.of<GlobalModel>(context, listen: false);
     File imageFile = await ImagePicker.pickImage(source: type);
     List<int> imageBytes = await compressFile(imageFile);
     if (imageFile != null) {

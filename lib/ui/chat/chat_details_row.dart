@@ -1,13 +1,14 @@
-import 'package:dim_example/config/contacts.dart';
-import 'package:dim_example/im/message_handle.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/item/chat_voice.dart';
+import 'package:wechat_flutter/config/contacts.dart';
+import 'package:wechat_flutter/im/message_handle.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/item/chat_voice.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailsRow extends StatefulWidget {
   final GestureTapCallback voiceOnTap;
   final bool isVoice;
   final LayoutWidgetBuilder edit;
+  final VoidCallback onEmojio;
   final Widget more;
   final String id;
   final int type;
@@ -19,6 +20,7 @@ class ChatDetailsRow extends StatefulWidget {
     this.more,
     this.id,
     this.type,
+    this.onEmojio,
   });
 
   ChatDetailsRowState createState() => ChatDetailsRowState();
@@ -47,7 +49,7 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      child: new Container(
+      child:           new Container(
         height: 50.0,
         padding: EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
@@ -78,17 +80,19 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
                     borderRadius: BorderRadius.circular(5.0)),
                 child: widget.isVoice
                     ? new ChatVoice(
-                        voiceFile: (path) {
-                          setState(() => this.path = path);
-                        },
-                      )
+                  voiceFile: (path) {
+                    setState(() => this.path = path);
+                  },
+                )
                     : new LayoutBuilder(builder: widget.edit),
               ),
             ),
             new InkWell(
               child: new Image.asset('assets/images/chat/ic_Emotion.webp',
                   width: 30, fit: BoxFit.cover),
-              onTap: () {},
+              onTap: () {
+                widget.onEmojio();
+              },
             ),
             widget.more,
           ],
@@ -97,4 +101,5 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
       onTap: () {},
     );
   }
+
 }

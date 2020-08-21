@@ -1,11 +1,11 @@
-import 'package:dim_example/im/entity/i_contact_info_entity.dart';
-import 'package:dim_example/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/i_contact_info_entity.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/im/friend_handle.dart';
-import 'package:dim_example/im/info_handle.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
 import 'dart:convert';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:dim/pinyin/pinyin_helper.dart';
 
 class Contact {
@@ -39,10 +39,11 @@ class ContactsPageData {
 
     final contactsData = await SharedUtil.instance.getString(Keys.contacts);
     final user = await SharedUtil.instance.getString(Keys.account);
-    final result = await getContactsFriends(user);
+    var result = await getContactsFriends(user);
 
     getMethod(result) async {
-      List<dynamic> dataMap = json.decode(result);
+      if (!listNoEmpty(result)) return contacts;
+      List<dynamic> dataMap = json.decode(jsonEncode(result));
       int dLength = dataMap.length;
       for (int i = 0; i < dLength; i++) {
         if (Platform.isIOS) {
@@ -84,15 +85,19 @@ class ContactsPageData {
       return contacts;
     }
 
+    if (result is String) {
+      result = json.decode(result);
+    }
+
     if (strNoEmpty(contactsData) || contactsData != '[]') {
       if (result != contactsData) {
-        await SharedUtil.instance.saveString(Keys.contacts, result);
+        await SharedUtil.instance.saveString(Keys.contacts, result.toString());
         return await getMethod(result);
       } else {
         return await getMethod(contactsData);
       }
     } else {
-      await SharedUtil.instance.saveString(Keys.contacts, result);
+      await SharedUtil.instance.saveString(Keys.contacts, result.toString());
       return await getMethod(result);
     }
   }

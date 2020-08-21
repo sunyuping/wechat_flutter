@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:dim_example/config/const.dart';
+import 'package:wechat_flutter/config/const.dart';
 
 class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
   const ComMomBar(
@@ -65,7 +65,7 @@ class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
                       style: new TextStyle(
                           color: mainColor,
                           fontSize: 17.0,
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w600),
                     )
                   : titleW,
               backgroundColor: mainColor,
@@ -84,7 +84,7 @@ class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
                     style: new TextStyle(
                         color: mainColor,
                         fontSize: 17.0,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w600),
                   )
                 : titleW,
             backgroundColor: backgroundColor,

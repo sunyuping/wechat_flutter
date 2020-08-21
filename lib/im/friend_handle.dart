@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 typedef OnSuCc = void Function(bool v);
 
@@ -56,5 +56,15 @@ Future<dynamic> getContactsFriends(String userName) async {
     return result;
   } on PlatformException {
     debugPrint('获取好友列表  失败');
+  }
+}
+
+Future<dynamic> createGroupChat(List<String> personList,
+    {String name, Callback callback}) async {
+  try {
+    var result = await im.createGroupChat(name: name, personList: personList);
+    callback(result);
+  } on PlatformException {
+    print('创建群组  失败');
   }
 }

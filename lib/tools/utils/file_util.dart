@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -82,7 +82,7 @@ class FileUtil {
           if (onComplete != null) onComplete(path + name);
         }
       },
-      options: Options(connectTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
+      options: Options(sendTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
     );
   }
 }

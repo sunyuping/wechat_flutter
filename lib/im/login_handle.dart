@@ -1,11 +1,11 @@
 import 'package:provider/provider.dart';
-import 'package:dim_example/pages/login/login_begin_page.dart';
-import 'package:dim_example/pages/root/root_page.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/pages/login/login_begin_page.dart';
+import 'package:wechat_flutter/pages/root/root_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 Future<void> init(BuildContext context) async {
   try {
@@ -17,7 +17,7 @@ Future<void> init(BuildContext context) async {
 }
 
 Future<void> login(String userName, BuildContext context) async {
-  final model = Provider.of<GlobalModel>(context);
+  final model = Provider.of<GlobalModel>(context, listen: false);
 
   try {
     var result = await im.imLogin(userName, null);
@@ -37,7 +37,7 @@ Future<void> login(String userName, BuildContext context) async {
 }
 
 Future<void> loginOut(BuildContext context) async {
-  final model = Provider.of<GlobalModel>(context);
+  final model = Provider.of<GlobalModel>(context, listen: false);
 
   try {
     var result = await im.imLogout();

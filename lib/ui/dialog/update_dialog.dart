@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dim_example/tools/utils/file_util.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/utils/file_util.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -136,7 +136,7 @@ class UpdateDialogState extends State<UpdateDialog> {
             });
           }
         },
-        options: Options(connectTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
+        options: Options(sendTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
       );
     } catch (e) {
       if (mounted) {

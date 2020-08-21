@@ -1,12 +1,12 @@
-import 'package:dim_example/im/conversation_handle.dart';
-import 'package:dim_example/im/model/chat_list.dart';
-import 'package:dim_example/pages/chat/chat_page.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/im/conversation_handle.dart';
+import 'package:wechat_flutter/im/model/chat_list.dart';
+import 'package:wechat_flutter/pages/chat/chat_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/ui/edit/text_span_builder.dart';
-import 'package:dim_example/ui/chat/my_conversation_view.dart';
-import 'package:dim_example/ui/view/pop_view.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
+import 'package:wechat_flutter/ui/view/pop_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage>
   List<ChatList> _chatData = [];
 
   var tapPos;
-  var isNull = false;
   TextSpanBuilder _builder = TextSpanBuilder();
   StreamSubscription<dynamic> _messageStreamSubscription;
 
@@ -31,11 +30,10 @@ class _HomePageState extends State<HomePage>
 
   Future getChatData() async {
     final str = await ChatListData().chatListData();
-    isNull = await ChatListData().isNull();
-
     List<ChatList> listChat = str;
+    if (!listNoEmpty(listChat)) return;
     _chatData.clear();
-    _chatData..addAll(listChat.reversed);
+    _chatData..addAll(listChat?.reversed);
     if (mounted) setState(() {});
   }
 
@@ -122,7 +120,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (isNull) return new HomeNullView();
+    if (!listNoEmpty(_chatData)) return new HomeNullView();
     return new Container(
       color: Color(AppColors.BackgroundColor),
       child: new ScrollConfiguration(

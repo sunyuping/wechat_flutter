@@ -1,6 +1,6 @@
-import 'package:dim_example/im/model/chat_data.dart';
-import 'package:dim_example/ui/massage/wait1.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/ui/massage/wait1.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class ChatDetailsBody extends StatelessWidget {
   final ScrollController sC;
   final List<ChatData> chatData;
 
-  ChatDetailsBody({this.sC,this.chatData});
+  ChatDetailsBody({this.sC, this.chatData});
 
   @override
   Widget build(BuildContext context) {
